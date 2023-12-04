@@ -20,6 +20,11 @@ def index(request):
         try:
             personne = Personne.objects.get(telephone=numero)
             nom = str(unidecode(personne.nom).upper())
+            characters = "'!? "
+
+            for x in range(len(characters)):
+                nom = nom.replace(characters[x], "")
+
         except ObjectDoesNotExist:
             nom = 'xxx'
 
