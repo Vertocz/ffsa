@@ -64,3 +64,17 @@ form {
     margin: auto;
 }
 
+#logo {
+    width: 20%;
+    height: 20%;
+}
+
+@media screen and (max-width: 768px) {
+    #logo {
+        width: 80vw;
+    }
+
+    form {
+        width: 90vw;
+    }
+}

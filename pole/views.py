@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 from urllib import response
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, FileResponse, Http404, HttpResponseRedirect
 from unidecode import unidecode
 from django.shortcuts import render, redirect
@@ -16,8 +17,11 @@ def index(request):
     if request.method == 'POST':
         form = NumeroForm(request.POST)
         numero = form.data['telephone']
-        personne = Personne.objects.get(telephone=numero)
-        nom = str(unidecode(personne.nom).upper())
+        try:
+            personne = Personne.objects.get(telephone=numero)
+            nom = str(unidecode(personne.nom).upper())
+        except ObjectDoesNotExist:
+            nom = 'xxx'
 
         directory = 'pole/billets/'
 
@@ -27,7 +31,7 @@ def index(request):
                     messages.success(request, 'Votre billet a été téléchargé')
                     return FileResponse(open(str(os.path.join(root, file)), 'rb'), as_attachment=True, filename=str(file))
                 else:
-                    pass
+                    form = NumeroForm()
 
     else:
         form = NumeroForm()
