@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+
+<h1>{{personne.nom}} {{personne.prenom}}</h1>
+
+<div>Née le : {{personne.DDN}}</div>
+<div>Convoquée :
+    {% if personne.convoquee %}
+    oui
+    {% else %}
+    non
+    {% endif %}
+</div>
+<div>Confirmation de la personne :
+    {% if personne.confirmation %}
+    oui
+    {% else %}
+    non
+    {% endif %}
+</div>
+<div>Gare de départ : {{personne.gare}} </div>
+{% if personne.carte %}
+<div>Carte de réduction : {{personne.carte}} (jusqu'au {{personne.fin_validite}})</div>
+{% endif %}
+<div>Téléphone : {{personne.telephone}}</div>
+<div>Adresse e-mail : {{personne.mail}}</div>
+
+
+{% endblock %}

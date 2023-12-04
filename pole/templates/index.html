@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+
+<h1><img src="{% static 'logo.jpg' %}" width="20%" height="20%"></h1>
+
+<form action="" method="post" novalidate>
+    {% csrf_token %}
+    <div>Numéro de téléphone</div>
+    <div style="font-size: 3rem; display: inline-flex; align-items: center">&#128241; {{ form.telephone }} &#128241;</div>
+    <input type="submit" value="&#128642; Télécharger mon billet &#128642;">
+</form>
+
+
+
+{% endblock %}
