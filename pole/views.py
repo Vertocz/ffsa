@@ -24,6 +24,7 @@ def index(request):
         for root, dirs, files in os.walk(directory):
             for file in files:
                 if nom in str(file):
+                    messages.success(request, 'Votre billet a été téléchargé')
                     return FileResponse(open(str(os.path.join(root, file)), 'rb'), as_attachment=True, filename=str(file))
                 else:
                     pass
