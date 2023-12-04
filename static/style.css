@@ -60,13 +60,14 @@ textarea {
 }
 
 form {
-    width: 50%;
+    max-width: 600px;
     margin: auto;
 }
 
 #logo {
     width: 20%;
     height: 20%;
+    margin: auto;
 }
 
 @media screen and (max-width: 768px) {
