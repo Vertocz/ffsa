@@ -59,7 +59,6 @@ textarea {
   font-size: 1.5rem;
   margin: 1rem auto;
   padding: 1rem;
-  max-width: 300px;
 }
 
 form {
@@ -70,6 +69,10 @@ form {
     width: 20%;
     height: 20%;
     margin: auto;
+}
+
+#id_telephone{
+    width: 250px;
 }
 
 @media screen and (max-width: 700px) {
