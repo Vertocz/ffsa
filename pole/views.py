@@ -19,29 +19,52 @@ def index(request):
         numero = form.data['telephone']
         try:
             personne = Personne.objects.get(telephone=numero)
-            nom = str(unidecode(personne.nom).upper())
-            characters = "'!? "
-
-            for x in range(len(characters)):
-                nom = nom.replace(characters[x], "")
+            return billets(request, personne)
 
         except ObjectDoesNotExist:
-            nom = 'xxx'
-
-        BASE_DIR = Path(__file__).resolve().parent.parent
-        directory = BASE_DIR / 'pole/billets/'
-
-        for root, dirs, files in os.walk(directory):
-            for file in files:
-                if nom in str(file):
-                    return FileResponse(open(str(os.path.join(root, file)), 'rb'), as_attachment=True, filename=str(file))
-                else:
-                    form = NumeroForm()
+            form = NumeroForm()
 
     else:
         form = NumeroForm()
 
-    return render(request, "index.html", {"form": form})
+    return render(request, "index.html", {"form": form, "billets": billets})
+
+
+def billets(request, personne):
+    billets = []
+    carte = ''
+    nom = str(unidecode(personne.nom).upper())
+    characters = "'!? "
+
+    for x in range(len(characters)):
+        nom = nom.replace(characters[x], "")
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    dossier_billets = BASE_DIR / 'pole/billets/'
+    dossier_cartes = BASE_DIR / 'pole/cartes/'
+
+    for root, dirs, files in os.walk(dossier_billets):
+        for file in files:
+            if nom in str(file):
+                billets.append(str(file))
+
+    for root, dirs, files in os.walk(dossier_cartes):
+        for file in files:
+            if nom in str(file):
+                carte = str(file)
+
+    return render(request, "billets.html", {'personne': personne, 'billets': billets, 'carte': carte, 'doss_billets': dossier_billets, 'doss_cartes': dossier_cartes})
+
+
+def telecharger_billet(file):
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    root = BASE_DIR / 'pole/billets/'
+    return FileResponse(open(str(os.path.join(root, file)), 'rb'), as_attachment=True, filename=str(file))
+
+
+def telecharger_carte(file):
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    root = BASE_DIR / 'pole/cartes/'
+    return FileResponse(open(str(os.path.join(root, file)), 'rb'), as_attachment=True, filename=str(file))
 
 
 def personne(request, id):

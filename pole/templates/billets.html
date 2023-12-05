@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+
+<img src="{% static 'logo.jpg' %}" id="logo">
+
+<h1>{{ personne.nom }} {{ personne.prenom}} </h1>
+
+{% if billets %}
+<h2>Mes billets</h2>
+{% for billet in billets %}
+<div><a href='{{ doss_billets }}\{{billet}}' download>{{ billet }}</a></div>
+{% endfor %}
+{% endif %}
+
+{% if carte %}
+<h2>Ma carte de réduction</h2>
+<div><a href="{% url 'telecharger-carte' carte %}">{{ carte }}</a></div>
+{% endif %}
+
+
+
+
+{% endblock %}
