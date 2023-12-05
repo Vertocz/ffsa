@@ -59,10 +59,10 @@ textarea {
   font-size: 1.5rem;
   margin: 1rem auto;
   padding: 1rem;
+  max-width: 600px;
 }
 
 form {
-    max-width: 600px;
     margin: auto;
 }
 
