@@ -15,11 +15,24 @@ from .forms import NumeroForm
 
 def index(request):
     if request.method == 'POST':
+        BASE_DIR = Path(__file__).resolve().parent.parent
         form = NumeroForm(request.POST)
         numero = form.data['telephone']
         try:
             personne = Personne.objects.get(telephone=numero)
-            return billets(request, personne)
+            nom = str(unidecode(personne.nom).upper())
+            characters = "'!? "
+            for x in range(len(characters)):
+                nom = nom.replace(characters[x], "")
+            if 'carta' in request.POST:
+                dossier_cartes = BASE_DIR / 'pole/cartes/'
+                for root, dirs, files in os.walk(dossier_cartes):
+                    print(root)
+                    for file in files:
+                        if nom in str(file):
+                            return FileResponse(open(str(os.path.join(root, file)), 'rb'), as_attachment=True, filename=str(file))
+            else:
+                return billets(request, personne)
 
         except ObjectDoesNotExist:
             form = NumeroForm()
@@ -35,36 +48,41 @@ def billets(request, personne):
     carte = ''
     nom = str(unidecode(personne.nom).upper())
     characters = "'!? "
-
     for x in range(len(characters)):
         nom = nom.replace(characters[x], "")
     BASE_DIR = Path(__file__).resolve().parent.parent
     dossier_billets = BASE_DIR / 'pole/billets/'
-    dossier_cartes = BASE_DIR / 'pole/cartes/'
 
     for root, dirs, files in os.walk(dossier_billets):
         for file in files:
             if nom in str(file):
                 billets.append(str(file))
 
-    for root, dirs, files in os.walk(dossier_cartes):
-        for file in files:
-            if nom in str(file):
-                carte = str(file)
+    if request.method == 'GET':
+        print(request.GET)
+        for x in range(len(billets)):
+            for key in request.GET:
+                if int(x) == int(key):
+                    print("yes", x)
+                    for root, dirs, files in os.walk(dossier_billets):
+                        for file in files:
+                            if str(file) == str(billets[x]):
+                                return FileResponse(open(str(os.path.join(root, file)), 'rb'), as_attachment=True, filename=str(file))
+                else:
+                    print('no', key, x)
 
-    return render(request, "billets.html", {'personne': personne, 'billets': billets, 'carte': carte, 'doss_billets': dossier_billets, 'doss_cartes': dossier_cartes})
+    return render(request, "billets.html", {'personne': personne, 'billets': billets, 'carte': carte, 'doss_billets': dossier_billets})
 
 
-def telecharger_billet(file):
+def telecharger_billet(personne, numero):
     BASE_DIR = Path(__file__).resolve().parent.parent
     root = BASE_DIR / 'pole/billets/'
-    return FileResponse(open(str(os.path.join(root, file)), 'rb'), as_attachment=True, filename=str(file))
-
-
-def telecharger_carte(file):
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    root = BASE_DIR / 'pole/cartes/'
-    return FileResponse(open(str(os.path.join(root, file)), 'rb'), as_attachment=True, filename=str(file))
+    billets = []
+    for root, dirs, files in os.walk(root):
+        for file in files:
+            if str(personne.nom) in str(file):
+                billets.append(str(file))
+    return FileResponse(open(str(os.path.join(root, billets[numero])), 'rb'), as_attachment=True, filename=str(billets[numero]))
 
 
 def personne(request, id):

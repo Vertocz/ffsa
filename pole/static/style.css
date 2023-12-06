@@ -17,11 +17,9 @@ html, body {
 
 body {
     color: var(--text);
-    font-size: calc(16px + 0.390625vw);
+    font-size: 1.5rem;
     text-align: center;
-    height: 100%;
     justify-content:space-between;
-    max-width: 90vw;
     margin: auto;
 }
 
@@ -56,7 +54,7 @@ select,
 textarea {
   display: flex;
   font-family: inherit;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   margin: 1rem auto;
   padding: 1rem;
 }
@@ -73,6 +71,13 @@ form {
 
 #id_telephone{
     width: 170px;
+    text-align: center;
+}
+
+.message {
+    background-color: var(--c2);
+    color: var(--fond);
+    padding: 1rem;
 }
 
 @media screen and (max-width: 700px) {
