@@ -58,7 +58,7 @@ def billets(request, personne):
             if nom in str(file):
                 billets.append(str(file))
 
-    if request.method == 'GET':
+    if request.GET:
         print(request.GET)
         for x in range(len(billets)):
             for key in request.GET:

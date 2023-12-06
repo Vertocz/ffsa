@@ -3,9 +3,6 @@
 {% block content %}
 {% load static %}
 
-
-<a href="{% url 'index' %}"><img src="{% static 'logo.jpg' %}" id="logo"></a>
-
 <h1>{{ personne.nom }} {{ personne.prenom}} </h1>
 
 {% if billets %}
