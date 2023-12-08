@@ -8,7 +8,7 @@
 {% if billets %}
 <form action="">
 {% for billet in billets %}
-<input type="submit" name="{{forloop.counter0}}" value="Billet {{forloop.counter}}">
+    <a href="{{billet}}">Billet</a>
 {% endfor %}
 </form>
 {% else %}

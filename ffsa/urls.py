@@ -7,5 +7,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('membre/<int:id>/', personne, name='personne'),
     path('membre/<int:id>/billets/', billets, name="billets"),
-    path('telecharger/<int:id>', telecharger_billet, name='telecharger-billet'),
+    path('telecharger/<str:billet>', telecharger_billet, name='telecharger-billet'),
 ]
