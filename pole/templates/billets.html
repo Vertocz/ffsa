@@ -8,7 +8,7 @@
 {% if billets %}
 <form action="">
 {% for billet in billets %}
-    <a href="{{billet}}">Billet</a>
+    <div><a href="{{billet}}" download="{{billet}}" >Billet</a></div>
 {% endfor %}
 </form>
 {% else %}
