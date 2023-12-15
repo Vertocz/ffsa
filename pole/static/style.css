@@ -53,9 +53,9 @@ input,
 select,
 textarea {
   display: flex;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   margin: 1rem auto;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .bouton-accueil {
@@ -70,21 +70,21 @@ form {
     width: 20%;
     height: 20%;
     margin: auto;
+    padding: 0 0 2rem 0;
 }
 
 #id_telephone{
-    width: 170px;
+    width: 220px;
     text-align: center;
 }
 
 .message {
     background-color: var(--c2);
-    color: var(--fond);
     padding: 1rem;
 }
 
 @media screen and (max-width: 700px) {
     #logo {
-        width: 50vw;
+        width: 45vw;
     }
 }

@@ -4,8 +4,8 @@ from pathlib import Path
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import FileResponse
 from unidecode import unidecode
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from ffsa.settings import MEDIA_ROOT
 from pole.models import *
 from .forms import NumeroForm
@@ -27,6 +27,9 @@ def index(request):
                     for file in files:
                         if nom in str(file):
                             return FileResponse(open(str(os.path.join(root, file)), 'rb'), as_attachment=True, filename=str(file))
+                        else:
+                            messages.success(request, ("Il n\'y a pas de carte disponible pour ce numéro"))
+                            return redirect('index')
 
             if 'billetos' in request.POST:
                 liste_billets = []
