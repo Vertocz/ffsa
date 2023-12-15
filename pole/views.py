@@ -9,6 +9,8 @@ from django.http import HttpResponse, FileResponse, Http404, HttpResponseRedirec
 from unidecode import unidecode
 from django.shortcuts import render, redirect
 from django.contrib import messages
+
+from ffsa.settings import MEDIA_ROOT
 from pole.models import *
 from .forms import NumeroForm
 
@@ -26,14 +28,14 @@ def index(request):
                 nom = nom.replace(characters[x], "")
 
             if 'carta' in request.POST:
-                for root, dirs, files in os.walk(BASE_DIR / 'pole/cartes/'):
+                for root, dirs, files in os.walk(Path(MEDIA_ROOT).resolve() / 'cartes/'):
                     for file in files:
                         if nom in str(file):
                             return FileResponse(open(str(os.path.join(root, file)), 'rb'), as_attachment=True, filename=str(file))
 
             if 'billetos' in request.POST:
                 liste_billets = []
-                for root, dirs, files in os.walk(BASE_DIR / 'pole/billets/'):
+                for root, dirs, files in os.walk(Path(MEDIA_ROOT).resolve() / 'billets/'):
                     for file in files:
                         if nom in str(file):
                             liste_billets.append(str(os.path.join(root, file)))
@@ -52,9 +54,8 @@ def billets(request, personne, liste_billets):
     return render(request, "billets.html", {'personne': personne, "billets": liste_billets})
 
 
-def telecharger_billet(billet):
-    print("BILLET", billet[12:])
-    return FileResponse(open(billet, 'rb'), as_attachment=True)
+def telecharger_billet(request, billet):
+    return FileResponse(open(Path(MEDIA_ROOT).resolve() / 'billets' / Path(billet).resolve(), 'rb'), as_attachment=True)
 
 
 def personne(request, id):
