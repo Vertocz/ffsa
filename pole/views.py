@@ -31,6 +31,7 @@ def index(request):
             if 'billetos' in request.POST:
                 liste_billets = []
                 for root, dirs, files in os.walk(Path(MEDIA_ROOT).resolve() / 'billets/'):
+                    print("root", root, "dirs", dirs, "files", files)
                     for file in files:
                         if nom in str(file):
                             liste_billets.append(str(os.path.join(root, file)))
