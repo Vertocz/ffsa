@@ -90,5 +90,6 @@ form {
 
     .bouton-accueil{
         width: 95vw;
+        margin: auto;
     }
 }

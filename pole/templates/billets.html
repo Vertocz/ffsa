@@ -6,11 +6,9 @@
 <h1>{{ personne.nom }} {{ personne.prenom}} </h1>
 
 {% if billets %}
-<form action="">
 {% for billet in billets %}
     <div><a href="{% url 'telecharger-billet' billet=billet %}" >Billet {{ forloop.counter }}</a></div>
 {% endfor %}
-</form>
 {% else %}
 <div>Pas de billet enregistré pour le moment</div>
 {% endif %}

@@ -31,10 +31,9 @@ def index(request):
             if 'billetos' in request.POST:
                 liste_billets = []
                 for root, dirs, files in os.walk(Path(MEDIA_ROOT).resolve() / 'billets/'):
-                    print("root", root, "dirs", dirs, "files", files)
                     for file in files:
                         if nom in str(file):
-                            liste_billets.append(str(os.path.join(root, file)))
+                            liste_billets.append(str(file))
                 return billets(request, personne, liste_billets)
 
         except ObjectDoesNotExist:
@@ -51,7 +50,7 @@ def billets(request, personne, liste_billets):
 
 
 def telecharger_billet(request, billet):
-    return FileResponse(open(Path(MEDIA_ROOT).resolve() / 'billets' / Path(billet).resolve(), 'rb'), as_attachment=True)
+    return FileResponse(open(Path(MEDIA_ROOT).resolve() / 'billets' / billet, 'rb'), as_attachment=True)
 
 
 def personne(request, id):
