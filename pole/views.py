@@ -1,14 +1,10 @@
-import glob
-import mimetypes
 import os
 from pathlib import Path
-from urllib import response
 
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse, FileResponse, Http404, HttpResponseRedirect
+from django.http import FileResponse
 from unidecode import unidecode
-from django.shortcuts import render, redirect
-from django.contrib import messages
+from django.shortcuts import render
 
 from ffsa.settings import MEDIA_ROOT
 from pole.models import *
@@ -17,7 +13,6 @@ from .forms import NumeroForm
 
 def index(request):
     if request.method == 'POST':
-        BASE_DIR = Path(__file__).resolve().parent.parent
         form = NumeroForm(request.POST)
         numero = form.data['telephone']
         try:
