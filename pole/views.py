@@ -21,6 +21,7 @@ def index(request):
             characters = "'!? "
             for x in range(len(characters)):
                 nom = nom.replace(characters[x], "")
+                print(nom)
 
             if 'carta' in request.POST:
                 for root, dirs, files in os.walk(Path(MEDIA_ROOT).resolve() / 'cartes/'):
