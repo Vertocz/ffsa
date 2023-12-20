@@ -26,12 +26,14 @@ def index(request):
             if 'carta' in request.POST:
                 liste_cartes = []
                 for root, dirs, files in os.walk(Path(MEDIA_ROOT).resolve() / 'cartes/'):
+                    print(root, dirs, files)
                     for file in files:
                         if nom in str(file):
-                            return FileResponse(open(Path(MEDIA_ROOT).resolve() / 'cartes' / str(file), 'rb'), as_attachment=True)
-                        else:
-                            messages.success(request, ("Il n\'y a pas de carte disponible pour ce numéro"))
-                            return redirect('index')
+                            liste_cartes.append(str(file))
+                    if len(liste_cartes) == 0:
+                        messages.success(request, ("Il n\'y a pas de carte disponible pour ce numéro"))
+                        return redirect('index')
+                    return cartes(request, personne, liste_cartes)
 
             if 'billetos' in request.POST:
                 liste_billets = []
@@ -54,8 +56,16 @@ def billets(request, personne, liste_billets):
     return render(request, "billets.html", {'personne': personne, "billets": liste_billets})
 
 
+def cartes(request, personne, liste_cartes):
+    return render(request, "cartes.html", {'personne': personne, "cartes": liste_cartes})
+
+
 def telecharger_billet(request, billet):
     return FileResponse(open(Path(MEDIA_ROOT).resolve() / 'billets' / billet, 'rb'), as_attachment=True)
+
+
+def telecharger_carte(request, carte):
+    return FileResponse(open(Path(MEDIA_ROOT).resolve() / 'cartes' / carte, 'rb'), as_attachment=True)
 
 
 def personne(request, id):

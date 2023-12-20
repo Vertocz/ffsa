@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<h1>{{ personne.nom }} {{ personne.prenom}} </h1>
+
+{% if cartes %}
+{% for carte in cartes %}
+    <div><a href="{% url 'telecharger-carte' carte=carte %}" >Carte {{ forloop.counter }}</a></div>
+{% endfor %}
+{% else %}
+<div>Pas de carte enregistrée pour le moment</div>
+{% endif %}
+
+{% endblock %}
