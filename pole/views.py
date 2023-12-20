@@ -24,10 +24,11 @@ def index(request):
                 print(nom)
 
             if 'carta' in request.POST:
+                liste_cartes = []
                 for root, dirs, files in os.walk(Path(MEDIA_ROOT).resolve() / 'cartes/'):
                     for file in files:
                         if nom in str(file):
-                            return FileResponse(open(str(os.path.join(root, file)), 'rb'), as_attachment=True, filename=str(file))
+                            return FileResponse(open(Path(MEDIA_ROOT).resolve() / 'cartes' / str(file), 'rb'), as_attachment=True)
                         else:
                             messages.success(request, ("Il n\'y a pas de carte disponible pour ce numéro"))
                             return redirect('index')
