@@ -1,4 +1,5 @@
 import os
+import re
 from pathlib import Path
 
 from django.core.exceptions import ObjectDoesNotExist
@@ -14,19 +15,20 @@ from .forms import NumeroForm
 def index(request):
     if request.method == 'POST':
         form = NumeroForm(request.POST)
-        numero = form.data['telephone']
+        phone = form.data['telephone'].replace(" ", "")
+        numero = re.sub('\++33', '0', phone)
+
+
         try:
             personne = Personne.objects.get(telephone=numero)
             nom = str(unidecode(personne.nom).upper())
             characters = "'!? "
             for x in range(len(characters)):
                 nom = nom.replace(characters[x], "")
-                print(nom)
 
             if 'carta' in request.POST:
                 liste_cartes = []
                 for root, dirs, files in os.walk(Path(MEDIA_ROOT).resolve() / 'cartes/'):
-                    print(root, dirs, files)
                     for file in files:
                         if nom in str(file):
                             liste_cartes.append(str(file))
