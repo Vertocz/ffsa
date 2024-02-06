@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<h1>Dico Basket</h1>
+
+{% for entree in entrees %}
+
+<div><a href="{% url 'entree' entree %}">{{ entree.mot }}</a></div>
+
+{% endfor %}
+
+
+{% endblock %}

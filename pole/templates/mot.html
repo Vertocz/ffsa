@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<h1 class="mot">{{ entree.mot }}</h1>
+
+<div class="definition">{{ entree.definition }}</div>
+
+{% if entree.image %}
+<div>{{ entree.image }}</div>
+{% endif %}
+
+{% if entree.video %}
+<div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/{{entree.video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+{% endif %}
+
+<div style="padding: 1rem"><a href="{% url 'dico' %}">Retour</a></div>
+{% endblock %}

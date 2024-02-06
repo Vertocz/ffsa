@@ -74,3 +74,12 @@ def personne(request, id):
     fiche = Personne.objects.get(id=id)
     return render(request, "personne.html", {'personne': fiche})
 
+
+def dico(request):
+    entrees = Entree.objects.all().order_by('mot')
+    return render(request, "dico.html", {'entrees': entrees})
+
+
+def mot(request, entree):
+    entree_en_cours = Entree.objects.get(mot=entree)
+    return render(request, 'mot.html', {'entree': entree_en_cours})

@@ -9,4 +9,6 @@ urlpatterns = [
     path('membre/<int:id>/billets/', billets, name="billets"),
     path('telecharger/billets/<str:billet>/', telecharger_billet, name='telecharger-billet'),
     path('telecharger/cartes/<str:carte>/', telecharger_carte, name='telecharger-carte'),
+    path('dico/', dico, name='dico'),
+    path('dico/<str:entree>/', mot, name='entree'),
 ]
