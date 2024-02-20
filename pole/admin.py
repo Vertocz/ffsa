@@ -3,7 +3,7 @@ from .models import *
 
 
 class PersonneAdmin(admin.ModelAdmin):
-    list_display = ['nom', 'prenom', 'telephone', 'gare']
+    list_display = ['nom', 'prenom', 'telephone', 'pf', 'ph']
 
 class EntreeAdmin(admin.ModelAdmin):
     list_display = ['mot']
