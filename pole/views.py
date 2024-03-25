@@ -1,6 +1,5 @@
 import os
 import re
-import PIL
 from pathlib import Path
 
 from django.core.exceptions import ObjectDoesNotExist

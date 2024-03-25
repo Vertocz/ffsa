@@ -1,4 +1,3 @@
-import PIL
 from django.db import models
 
 
