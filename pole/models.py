@@ -20,7 +20,6 @@ class Personne(models.Model):
 class Entree(models.Model):
     mot = models.CharField(max_length=200, null=True)
     definition = models.CharField(max_length=600, null=True)
-    image = models.CharField(max_length=200, blank=True, null=True)
     video = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
@@ -29,4 +28,4 @@ class Entree(models.Model):
 
 class Gif(models.Model):
     mot = models.ForeignKey(Entree, on_delete=models.CASCADE, null=False)
-    image = models.ImageField(upload_to="gifs/")
+    image = models.FileField(upload_to="gifs/")
