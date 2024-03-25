@@ -82,4 +82,5 @@ def dico(request):
 
 def mot(request, entree):
     entree_en_cours = Entree.objects.get(mot=entree)
-    return render(request, 'mot.html', {'entree': entree_en_cours})
+    videos = Gif.objects.filter(mot=entree_en_cours)
+    return render(request, 'mot.html', {'entree': entree_en_cours, 'gifs': videos})

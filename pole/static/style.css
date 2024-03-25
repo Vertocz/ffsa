@@ -103,6 +103,10 @@ form {
     text-align: left;
 }
 
+.gif {
+    padding: 1rem;
+}
+
 @media screen and (max-width: 700px) {
     #logo {
         width: 45vw;
@@ -110,5 +114,9 @@ form {
 
     .definition {
         width: 80vw;
+    }
+
+    .gif {
+        max-width: 95vw;
     }
 }

@@ -1,3 +1,4 @@
+from django.core.files.storage import FileSystemStorage
 from django.db import models
 
 
@@ -25,3 +26,8 @@ class Entree(models.Model):
 
     def __str__(self):
         return f'{self.mot}'
+
+
+class Gif(models.Model):
+    mot = models.ForeignKey(Entree, on_delete=models.CASCADE, null=False)
+    image = models.ImageField(upload_to="gifs/")

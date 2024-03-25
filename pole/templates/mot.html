@@ -15,5 +15,9 @@
 <div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/{{entree.video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
 {% endif %}
 
+{% for gif in gifs %}
+<img src="{{ gif.image.url }}" alt="{{ gif.mot }}" class="gif">
+{% endfor %}
+
 <div style="padding: 1rem"><a href="{% url 'dico' %}">Retour</a></div>
 {% endblock %}

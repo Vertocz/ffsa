@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path, include
 from django.contrib import auth, admin
 from pole.views import *
@@ -11,4 +13,4 @@ urlpatterns = [
     path('telecharger/cartes/<str:carte>/', telecharger_carte, name='telecharger-carte'),
     path('dico/', dico, name='dico'),
     path('dico/<str:entree>/', mot, name='entree'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
