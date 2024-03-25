@@ -1,4 +1,4 @@
-from django.core.files.storage import FileSystemStorage
+import PIL
 from django.db import models
 
 
