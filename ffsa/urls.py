@@ -13,4 +13,5 @@ urlpatterns = [
     path('telecharger/cartes/<str:carte>/', telecharger_carte, name='telecharger-carte'),
     path('dico/', dico, name='dico'),
     path('dico/<str:entree>/', mot, name='entree'),
+    path('billets/', ajouter_billet, name='ajouter-billet')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

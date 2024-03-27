@@ -10,11 +10,16 @@ class Personne(models.Model):
     fin_validite = models.DateField(blank=True, null=True)
     telephone = models.CharField(max_length=20, null=True, blank=True)
     mail = models.EmailField(blank=True)
-    pf = models.BooleanField(default=False)
-    ph = models.BooleanField(default=False)
+    pf = models.BooleanField('Pôle Féminin', default=False)
+    ph = models.BooleanField('Pôle Masculin', default=False)
 
     def __str__(self):
-        return f'{self.prenom}'
+        return f'{self.nom + " " + self.prenom}'
+
+
+class Billet(models.Model):
+    personne = models.ForeignKey(Personne, on_delete=models.CASCADE, null=False)
+    billet = models.FileField(upload_to="billets/")
 
 
 class Entree(models.Model):

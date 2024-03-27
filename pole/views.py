@@ -3,13 +3,13 @@ import re
 from pathlib import Path
 
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import FileResponse
+from django.http import FileResponse, HttpResponseRedirect
 from unidecode import unidecode
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from ffsa.settings import MEDIA_ROOT
 from pole.models import *
-from .forms import NumeroForm
+from .forms import NumeroForm, AjoutBilletForm
 
 
 def index(request):
@@ -43,6 +43,8 @@ def index(request):
                     for file in files:
                         if nom in str(file):
                             liste_billets.append(str(file))
+                for billet in Billet.objects.filter(personne=personne):
+                    liste_billets.append(os.path.basename(billet.billet.file.name))
                 return billets(request, personne, liste_billets)
 
         except ObjectDoesNotExist:
@@ -60,6 +62,25 @@ def billets(request, personne, liste_billets):
 
 def cartes(request, personne, liste_cartes):
     return render(request, "cartes.html", {'personne': personne, "cartes": liste_cartes})
+
+
+def ajouter_billet(request):
+    if request.method == 'POST':
+        form = AjoutBilletForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Le billet a bien été mis en ligne')
+            return render(request, "ajout_billets.html", {"form": form})
+        else:
+            print(form.data)
+            print(request.FILES['billet'])
+            messages.success(request, 'Quelque chose ne s\'est pas passé correctement')
+            form = AjoutBilletForm()
+            return render(request, "ajout_billets.html", {'form': form})
+
+    else:
+        form = AjoutBilletForm()
+        return render(request, "ajout_billets.html", {'form': form})
 
 
 def telecharger_billet(request, billet):

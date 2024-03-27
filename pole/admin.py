@@ -6,6 +6,10 @@ class PersonneAdmin(admin.ModelAdmin):
     list_display = ['nom', 'prenom', 'telephone', 'pf', 'ph']
 
 
+class BilletAdmin(admin.ModelAdmin):
+    list_display = ['personne', 'billet']
+
+
 class EntreeAdmin(admin.ModelAdmin):
     list_display = ['mot']
 
@@ -15,5 +19,6 @@ class GifAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Personne, PersonneAdmin)
+admin.site.register(Billet, BilletAdmin)
 admin.site.register(Entree, EntreeAdmin)
 admin.site.register(Gif, GifAdmin)

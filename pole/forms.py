@@ -9,3 +9,7 @@ class NumeroForm(forms.ModelForm):
         fields = ['telephone']
 
 
+class AjoutBilletForm(forms.ModelForm):
+    class Meta:
+        model = Billet
+        fields = ['personne', 'billet']
