@@ -61,6 +61,8 @@ textarea {
 
 .bouton-accueil {
     width: 350px;
+    background-color: var(--c1);
+    color: white;
 }
 
 form {
