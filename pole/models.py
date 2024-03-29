@@ -13,6 +13,9 @@ class Personne(models.Model):
     pf = models.BooleanField('Pôle Féminin', default=False)
     ph = models.BooleanField('Pôle Masculin', default=False)
 
+    class Meta:
+        ordering = ['nom']
+
     def __str__(self):
         return f'{self.nom + " " + self.prenom}'
 
