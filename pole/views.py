@@ -1,4 +1,5 @@
 import os
+import random
 import re
 from pathlib import Path
 
@@ -99,6 +100,29 @@ def personne(request, id):
 def dico(request):
     entrees = Entree.objects.all().order_by('mot')
     return render(request, "dico.html", {'entrees': entrees})
+
+
+def quiz(request):
+    entrees = Entree.objects.all()
+    questions = []
+    for entree in entrees:
+        if len(Gif.objects.filter(mot=entree)) > 0:
+            video = random.choices(Gif.objects.filter(mot=entree))
+        else:
+            video = []
+        propositions = []
+        reponse = entree.mot
+        propositions.append(reponse)
+        while len(propositions) < 3:
+            for fausse_reponse in random.choices(entrees, k=1):
+                if fausse_reponse.mot in propositions:
+                    pass
+                else:
+                    propositions.append(fausse_reponse.mot)
+        random.shuffle(propositions)
+        questions.append([propositions, video])
+    random.shuffle(questions)
+    return render(request, "quiz.html", {'questions': questions})
 
 
 def mot(request, entree):
