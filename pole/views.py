@@ -108,8 +108,10 @@ def quiz(request):
     for entree in entrees:
         if len(Gif.objects.filter(mot=entree)) > 0:
             video = random.choices(Gif.objects.filter(mot=entree))
+            pas_video = False
         else:
-            video = []
+            video = entree.definition
+            pas_video = True
         propositions = []
         reponse = entree.mot
         propositions.append(reponse)
@@ -120,7 +122,7 @@ def quiz(request):
                 else:
                     propositions.append(fausse_reponse.mot)
         random.shuffle(propositions)
-        questions.append([propositions, video])
+        questions.append([propositions, video, pas_video])
     random.shuffle(questions)
     return render(request, "quiz.html", {'questions': questions})
 
