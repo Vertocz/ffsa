@@ -104,36 +104,58 @@ def quiz(request):
     entrees = Entree.objects.all()
     questions = []
     for entree in entrees:
+        propositions = []
+
+        types_questions = ['mot', 'def']
+        type_question = random.choice(types_questions)
+
         if len(Gif.objects.filter(mot=entree)) > 0:
-            video = random.choices(Gif.objects.filter(mot=entree))
             pas_video = False
         else:
-            video = entree.definition
             pas_video = True
-        propositions = []
-        reponse = entree.mot
-        propositions.append(reponse)
-        while len(propositions) < 3:
-            for fausse_reponse in random.choices(entrees, k=1):
-                if fausse_reponse.mot in propositions:
-                    pass
-                else:
-                    propositions.append(fausse_reponse.mot)
+
+        if type_question == 'mot':
+            if pas_video is False:
+                pas_video = True
+            question = entree.mot
+            reponse = entree.definition
+            propositions.append(reponse)
+            while len(propositions) < 3:
+                for fausse_reponse in random.choices(entrees, k=1):
+                    if fausse_reponse.definition in propositions:
+                        pass
+                    else:
+                        propositions.append(fausse_reponse.definition)
+
+        elif type_question == 'def':
+            if pas_video is False:
+                question = random.choices(Gif.objects.filter(mot=entree))
+            else:
+                question = entree.definition
+            reponse = entree.mot
+            propositions.append(reponse)
+            while len(propositions) < 3:
+                for fausse_reponse in random.choices(entrees, k=1):
+                    if fausse_reponse.mot in propositions:
+                        pass
+                    else:
+                        propositions.append(fausse_reponse.mot)
+
         random.shuffle(propositions)
-        questions.append([propositions, video, pas_video])
+        questions.append([propositions, question, pas_video, entree])
 
     if request.method == 'POST':
-        print(request.POST.getlist('quiz'))
         score = 0
-        reponses_utilisateur = request.POST.getlist('quiz')
-        for question, reponse_utilisateur in zip(questions, reponses_utilisateur):
-            print(question[0][0])
-            reponse_correcte = question[0][0]
-            if reponse_utilisateur == reponse_correcte:
+        correct = []
+        incorrect = []
+        for entree in entrees:
+            if entree.mot == request.POST.get(entree.mot) or entree.definition == request.POST.get(entree.mot):
+                correct.append(entree)
                 score += 1
             else:
-                pass
-        return render(request, "reponses.html", {'questions': questions, 'score': score})
+                incorrect.append(entree)
+
+        return render(request, "reponses.html", {'incorrect': incorrect, 'score': score, 'gifs': Gif.objects.all()})
 
     else:
         random.shuffle(questions)
