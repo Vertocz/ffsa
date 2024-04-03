@@ -6,29 +6,30 @@
 <h1>Quiz</h1>
 
 
+<form action="" method="post" novalidate>
+{% csrf_token %}
 
+    {% for question in questions %}
+    <h2>Question {{ forloop.counter }}</h2>
 
-{% for question in questions %}
-<h2>Question {{ forloop.counter }}</h2>
+    {% if question.1 and question.2 is False %}
+    <div><img src="{{ question.1.0.image.url }}" class="gif"></div>
+    {% elif question.2 is True %}
+    <div class="question">{{ question.1 }}</div>
+    {% endif %}
 
-{% if question.1 and question.2 is False %}
-<div><img src="{{ question.1.0.image.url }}" class="gif"></div>
-{% elif question.2 is True %}
-<div class="question">{{ question.1 }}</div>
-{% endif %}
-
-<div style="display: flex; flex-direction: column; align-items: center;">
-{% for proposition in question.0 %}
-    <div style="display: flex; flex-direction: row; align-items: center;">
-    <input type="radio" id="{{ proposition }}" name="question.1.0.mot" value="{{ proposition }}" />
-    <label for="{{ proposition }}" style="margin: 0 0 0.2rem 0.5rem">{{ proposition }}</label>
-    </div>
-{% endfor %}
-</div>
-{% endfor %}
+        <div style="display: flex; flex-direction: column; align-items: center;">
+        {% for proposition in question.0 %}
+            <div style="display: flex; flex-direction: row; align-items: center;">
+            <input type="radio" id="question{{ forloop.parentloop.counter }}_{{ forloop.counter }}" name="quiz{{ forloop.parentloop.counter }}" value="{{ proposition }}" />
+            <label for="question{{ forloop.parentloop.counter }}_{{ forloop.counter }}" style="margin: 0 0 0.2rem 0.5rem">{{ proposition }}</label>
+            </div>
+        {% endfor %}
+        </div>
+    {% endfor %}
 
 
 <input class="bouton-accueil" type="submit" name="quiz" value="Voir les réponses">
-
+</form>
 
 {% endblock %}

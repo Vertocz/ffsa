@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Correction du quiz</h1>
+
+    <ul>
+        {% for question in questions %}
+            <li>
+                <strong>Question {{ forloop.counter }} :</strong>
+                {% if question.2 %}
+                    <p>{{ question.1 }}</p> <!-- Afficher la définition si pas de GIF -->
+                {% else %}
+                    <img src="{{ question.1.0.image.url }}" alt="GIF">
+                {% endif %}
+
+                <ul>
+                    {% for proposition in question.0 %}
+                        <li {% if proposition == question.0.0 %}style="color: green;"{% else %}style="color: red;"{% endif %}>
+                            {{ proposition }}
+                            {% if proposition == question.0.0 %}
+                                (Correct)
+                            {% else %}
+                                (Incorrect - La réponse correcte est "{{ question.0.0 }}")
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -14,5 +14,6 @@ urlpatterns = [
     path('dico/', dico, name='dico'),
     path('dico/<str:entree>/', mot, name='entree'),
     path('billets/', ajouter_billet, name='ajouter-billet'),
-    path('quiz/', quiz, name='quiz')
+    path('quiz/', quiz, name='quiz'),
+    path('quiz/reponses', quiz, name='reponses'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

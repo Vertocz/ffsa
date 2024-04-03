@@ -73,8 +73,6 @@ def ajouter_billet(request):
             messages.success(request, 'Le billet a bien été mis en ligne')
             return render(request, "ajout_billets.html", {"form": form})
         else:
-            print(form.data)
-            print(request.FILES['billet'])
             messages.success(request, 'Quelque chose ne s\'est pas passé correctement')
             form = AjoutBilletForm()
             return render(request, "ajout_billets.html", {'form': form})
@@ -123,8 +121,23 @@ def quiz(request):
                     propositions.append(fausse_reponse.mot)
         random.shuffle(propositions)
         questions.append([propositions, video, pas_video])
-    random.shuffle(questions)
-    return render(request, "quiz.html", {'questions': questions})
+
+    if request.method == 'POST':
+        print(request.POST.getlist('quiz'))
+        score = 0
+        reponses_utilisateur = request.POST.getlist('quiz')
+        for question, reponse_utilisateur in zip(questions, reponses_utilisateur):
+            print(question[0][0])
+            reponse_correcte = question[0][0]
+            if reponse_utilisateur == reponse_correcte:
+                score += 1
+            else:
+                pass
+        return render(request, "reponses.html", {'questions': questions, 'score': score})
+
+    else:
+        random.shuffle(questions)
+        return render(request, "quiz.html", {'questions': questions})
 
 
 def mot(request, entree):
