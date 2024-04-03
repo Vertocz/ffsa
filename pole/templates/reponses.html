@@ -2,17 +2,23 @@
 {% block content %}
 
 
-<h2>Score : {{ score }} point{{ score|pluralize }} !!!</h2>
-<h1>Correction du quiz</h1>
-{% for entree in incorrect %}
-<h2>{{ entree.mot }}</h2>
-<p>{{ entree.definition }}</p>
-{% for gif in gifs %}
-{% if gif.mot == entree %}
-<img src="{{ gif.image.url }}" alt="{{ gif.mot }}" class="gif">
-{% endif %}
-{% endfor %}
-{% endfor %}
+<h2>Score : {{ score }}/{{ entrees }}</h2>
+    {% if score == entrees %}
+    <h2>Félicitations !!!</h2>
+    {% elif score < entrees %}
+    <h1>Correction du quiz</h1>
+        {% for entree in incorrect %}
+        <h2>{{ entree.mot }}</h2>
+        <p>{{ entree.definition }}</p>
+            {% for gif in gifs %}
+                {% if gif.mot == entree %}
+                <img src="{{ gif.image.url }}" alt="{{ gif.mot }}" class="gif">
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+<a href="{% url 'quiz' %}"><p style="font-size: 3rem">Rééssayer</p></a>
 
 
 {% endblock %}

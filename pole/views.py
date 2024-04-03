@@ -155,7 +155,7 @@ def quiz(request):
             else:
                 incorrect.append(entree)
 
-        return render(request, "reponses.html", {'incorrect': incorrect, 'score': score, 'gifs': Gif.objects.all()})
+        return render(request, "reponses.html", {'incorrect': incorrect, 'score': score, 'gifs': Gif.objects.all(), 'entrees': len(entrees)})
 
     else:
         random.shuffle(questions)
