@@ -10,7 +10,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from ffsa.settings import MEDIA_ROOT
 from pole.models import *
-from .forms import NumeroForm, AjoutBilletForm
+from .forms import NumeroForm, AjoutBilletForm, UserForm
 
 
 def index(request):
@@ -55,6 +55,27 @@ def index(request):
         form = NumeroForm()
 
     return render(request, "index.html", {"form": form})
+
+
+def menu(request):
+    return render(request, 'menu.html')
+
+
+def ajouter_utilisateur(request):
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'L\'utilisateur a bien été ajouté')
+            return render(request, "ajout_utilisateur.html", {"form": form})
+        else:
+            messages.success(request, 'Quelque chose ne s\'est pas passé correctement')
+            form = UserForm()
+            return render(request, "ajout_utilisateur.html", {'form': form})
+
+    else:
+        form = UserForm()
+        return render(request, "ajout_utilisateur.html", {'form': form})
 
 
 def billets(request, personne, liste_billets):

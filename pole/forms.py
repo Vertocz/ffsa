@@ -7,6 +7,18 @@ class NumeroForm(forms.ModelForm):
     class Meta:
         model = Personne
         fields = ['telephone']
+        widgets = {'telephone': forms.TextInput(attrs={'placeholder': '06XXXXXXXX'})}
+
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = Personne
+        fields = ['nom', 'prenom', 'DDN', 'telephone', 'pf', 'ph']
+        widgets = {
+            'nom': forms.TextInput(attrs={'placeholder': 'Parker'}),
+            'prenom': forms.TextInput(attrs={'placeholder': 'Tony'}),
+            'DDN': forms.TextInput(attrs={'placeholder': '17/05/1982'}),
+            'telephone': forms.TextInput(attrs={'placeholder': '06XXXXXXXX'})}
 
 
 class AjoutBilletForm(forms.ModelForm):

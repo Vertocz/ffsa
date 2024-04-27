@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<h2><a href="{% url 'index' %}">Récupérer un billet</a></h2>
+<h2><a href="{% url 'ajouter-billet' %}">Ajouter un billet</a></h2>
+<h2><a href="{% url 'ajouter-utilisateur' %}">Ajouter un utilisateur</a></h2>
+<h2><a href="{% url 'quiz' %}">Quiz</a></h2>
+<h2><a href="{% url 'dico' %}">Dico Basket</a></h2>
+
+{% endblock %}

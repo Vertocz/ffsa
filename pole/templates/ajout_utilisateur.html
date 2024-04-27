@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+
+<form action="" method="" novalidate>
+    {% csrf_token %}
+    {{ form.nom }}
+    {{ form.prenom }}
+    {{ form.DDN }}
+    {{ form.telephone }}
+    <div>Pôle féminin {{ form.pf }}</div>
+    Pôle masculin {{ form.ph }}
+</form>
+
+
+{% endblock %}
