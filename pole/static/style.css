@@ -32,6 +32,23 @@ h2 {
     color: var(--c2);
 }
 
+.menu {
+    background-color: var(--c2);
+    font-size: 1.6rem;
+    color: white;
+    border-radius: 15px;
+    padding: 1rem;
+    margin: 1rem auto;
+    max-width: 400px;
+}
+
+.menu:hover{
+    color: var(--c1);
+    background-color: white;
+    box-shadow: 1px 1px 5px var(--c1);
+    transition: ease 0.2s;
+}
+
 a:link {
     color: var(--c1);
     text-decoration: none;
@@ -52,7 +69,6 @@ button,
 input,
 select,
 textarea {
-  display: flex;
   font-size: 1.5rem;
   margin: 1rem auto;
   padding: 0.5rem;
@@ -60,6 +76,8 @@ textarea {
 }
 
 .bouton-accueil {
+    display: flex;
+    flex-direction: row;
     width: 350px;
     background-color: var(--c1);
     color: white;
@@ -69,6 +87,10 @@ form {
     margin: auto;
 }
 
+input {
+    text-align: center;
+}
+
 #logo {
     width: 20%;
     height: 20%;
@@ -76,7 +98,7 @@ form {
     padding: 0 0 2rem 0;
 }
 
-#id_telephone{
+#id_telephone, #id_nom, #id_prenom, #id_DDN{
     width: 220px;
     text-align: center;
 }
@@ -84,10 +106,6 @@ form {
 .message {
     background-color: var(--c2);
     padding: 1rem;
-}
-
-.mot {
-
 }
 
 .definition {

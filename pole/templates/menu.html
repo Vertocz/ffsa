@@ -3,10 +3,10 @@
 {% block content %}
 {% load static %}
 
-<h2><a href="{% url 'index' %}">Récupérer un billet</a></h2>
-<h2><a href="{% url 'ajouter-billet' %}">Ajouter un billet</a></h2>
-<h2><a href="{% url 'ajouter-utilisateur' %}">Ajouter un utilisateur</a></h2>
-<h2><a href="{% url 'quiz' %}">Quiz</a></h2>
-<h2><a href="{% url 'dico' %}">Dico Basket</a></h2>
+<a href="{% url 'index' %}"><h2 class="menu">Récupérer un billet</h2></a>
+<a href="{% url 'ajouter-billet' %}"><h2 class="menu">Ajouter un billet</h2></a>
+<a href="{% url 'ajouter-utilisateur' %}"><h2 class="menu">Ajouter un utilisateur</h2></a>
+<a href="{% url 'dico' %}"><h2 class="menu">Dico Basket</h2></a>
+<a href="{% url 'quiz' %}"><h2 class="menu">Quiz</h2></a>
 
 {% endblock %}

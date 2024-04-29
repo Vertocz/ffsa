@@ -6,12 +6,13 @@
 
 <form action="" method="" novalidate>
     {% csrf_token %}
-    {{ form.nom }}
-    {{ form.prenom }}
-    {{ form.DDN }}
-    {{ form.telephone }}
-    <div>Pôle féminin {{ form.pf }}</div>
-    Pôle masculin {{ form.ph }}
+
+    <p>{{ form.nom }}</p>
+    <p>{{ form.prenom }}</p>
+    <p>{{ form.DDN }}</p>
+    <p>Pôle féminin {{ form.pf }}</p>
+    <p>Pôle masculin {{ form.ph }}</p>
+    <input class="bouton-accueil" type="submit" value="Enregistrer">
 </form>
 
 
