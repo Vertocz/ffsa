@@ -1,9 +1,6 @@
 import os
 import random
 import re
-import matplotlib.pyplot as plt
-import numpy as np
-from matplotlib.animation import FuncAnimation
 from pathlib import Path
 
 from django.core.exceptions import ObjectDoesNotExist
@@ -184,10 +181,6 @@ def quiz(request):
     else:
         random.shuffle(questions)
         return render(request, "quiz.html", {'questions': questions})
-
-
-def timer(request):
-    return render(request, "timer.html", {})
 
 
 def mot(request, entree):

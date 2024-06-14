@@ -17,6 +17,5 @@ urlpatterns = [
     path('billets/', ajouter_billet, name='ajouter-billet'),
     path('quiz/', quiz, name='quiz'),
     path('quiz/reponses', quiz, name='reponses'),
-    path('timer/', timer, name='timer'),
     path('menu/', menu, name='menu')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
