@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<h1>Préparation physique</h1>
+
+<form action="" method="POST" novalidate>
+    {% csrf_token %}
+    <h2>Joueuse qui a fait la séance</h2>
+    {{ form.joueuse }}
+    <h2>Exercice</h2>
+    <div class="radio">
+        <div class="form-check">
+            <img src="{% static 'natation.png' %}" style="max-width:100px">
+            <label>Natation</label>
+            <input class="form-check-input" type="radio" name='exercice' id=natation value='natation'>
+        </div>
+        <div class="form-check">
+            <img src="{% static 'velo.png' %}" style="max-width:100px">
+            <label>Vélo</label>
+            <input class="form-check-input" type="radio" name='exercice' id=velo value='velo'>
+        </div>
+         <div class="form-check">
+            <img src="{% static 'course.png' %}" style="max-width:100px">
+            <label>Course</label>
+            <input class="form-check-input" type="radio" name='exercice' id=course value='course'>
+        </div>
+        <div class="form-check">
+            <img src="{% static 'renforcement.png' %}" style="max-width:100px">
+            <label>Renforcement</label>
+            <input class="form-check-input" type="radio" name='exercice' id=renforcement value="renforcement">
+        </div>
+        <div class="form-check">
+            <img src="{% static 'etirements.png' %}" style="max-width:100px">
+            <label>Etirements</label>
+            <input class="form-check-input" type="radio" name='exercice' id=etirements value="etirements">
+        </div>
+    </div>
+
+    <h2>Plaisir à faire la séance</h2>
+    <div class="radio">
+        <div class="form-check">
+            <img src="{% static 'smiley0.png' %}" id="smiley0" style="max-width:100px">
+            <input class="form-check-input" type="radio" name='plaisir' id=0 value=0 style="">
+        </div>
+        <div class="form-check">
+            <img src="{% static 'smiley1.png' %}" id="smiley1" style="max-width:100px">
+            <input class="form-check-input" type="radio" name='plaisir' id=1 value=1>
+        </div>
+        <div class="form-check">
+            <img src="{% static 'smiley2.png' %}" id="smiley2" style="max-width:100px">
+            <input class="form-check-input" type="radio" name='plaisir' id=2 value=2>
+        </div>
+        <div class="form-check">
+            <img src="{% static 'smiley3.png' %}" id="smiley3" style="max-width:100px">
+            <input class="form-check-input" type="radio" name='plaisir' id=3 value=3>
+        </div>
+        <div class="form-check">
+            <img src="{% static 'smiley4.png' %}" id="smiley4" style="max-width:100px">
+            <input class="form-check-input" type="radio" name='plaisir' id=4 value=4>
+        </div>
+    </div>
+
+    <h2>Difficulté de la séance</h2>
+    <div style="display:inline-flex; align-items: center;">
+    <div style="font-size:60px">&#128526;</div>
+    <div class="slidecontainer">
+        <input type="range" min="0" max="10" value="5" class="slider" id="myRange" name="effort">
+    </div>
+    <div style="font-size:60px">&#129397;</div>
+    </div>
+    <input class="bouton-accueil" type="submit" value="Envoyer à Camille">
+</form>
+
+{% endblock %}

@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.forms import RadioSelect
 
 
 class Personne(models.Model):
@@ -33,3 +35,10 @@ class Entree(models.Model):
 class Gif(models.Model):
     mot = models.ForeignKey(Entree, on_delete=models.CASCADE, null=False)
     image = models.FileField(upload_to="gifs/")
+
+
+class Camille(models.Model):
+    exercice = models.CharField(max_length=30)
+    joueuse = models.ForeignKey(Personne, on_delete=models.CASCADE, null=False)
+    plaisir = models.CharField(max_length=15)
+    effort = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])

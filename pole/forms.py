@@ -25,3 +25,9 @@ class AjoutBilletForm(forms.ModelForm):
     class Meta:
         model = Billet
         fields = ['personne', 'billet']
+
+
+class PrepaForm(forms.ModelForm):
+    class Meta:
+        model = Camille
+        fields = ['joueuse', 'exercice', 'plaisir', 'effort']

@@ -87,6 +87,21 @@ form {
     margin: auto;
 }
 
+.radio {
+    display:inline-flex;
+}
+
+.form-check {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.slider {
+    margin: 0 1rem;
+}
+
 input {
     text-align: center;
 }

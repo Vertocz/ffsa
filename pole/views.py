@@ -1,3 +1,4 @@
+import datetime
 import os
 import random
 import re
@@ -10,7 +11,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from ffsa.settings import MEDIA_ROOT
 from pole.models import *
-from .forms import NumeroForm, AjoutBilletForm, UserForm
+from .forms import *
 
 
 def index(request):
@@ -187,3 +188,22 @@ def mot(request, entree):
     entree_en_cours = Entree.objects.get(mot=entree)
     videos = Gif.objects.filter(mot=entree_en_cours)
     return render(request, 'mot.html', {'entree': entree_en_cours, 'gifs': videos})
+
+
+def prepa_camille(request):
+    if request.method == 'POST':
+        form = PrepaForm(request.POST)
+        form.fields["joueuse"] = forms.ModelChoiceField(queryset=Personne.objects.filter(pf=True))
+        if form.is_valid():
+            print(datetime.datetime.today().strftime("%d/%m/%y"), str(Personne.objects.get(id=form.data['joueuse'])) + ' //', 'Type d\'entraînement :', form.data['exercice'] + ',', 'Plaisir :', form.data['plaisir'] + '/5, Effort :', form.data['effort'] + '/10')
+            messages.success(request, 'Le test a bien été rempli')
+            return render(request, "prepa.html", {'form': form})
+        else:
+            messages.success(request, 'Quelque chose ne s\'est pas passé correctement')
+            form = PrepaForm()
+            form.fields["joueuse"] = forms.ModelChoiceField(queryset=Personne.objects.filter(pf=True))
+            return render(request, "prepa.html", {'form': form})
+    else:
+        form = PrepaForm()
+        form.fields["joueuse"] = forms.ModelChoiceField(queryset=Personne.objects.filter(pf=True))
+        return render(request, "prepa.html", {'form': form})
