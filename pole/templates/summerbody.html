@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+
+<h1>&#128526; Summer bodies &#128526;</h1>
+
+<table>
+  <thead>
+    <tr>
+        <th>Joueuse</th>
+        <th>Date</th>
+        <th>Exercice</th>
+        <th>Durée</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  {% for exo in resume %}
+      <tr>
+        <td>{{exo.joueuse.prenom}}</td>
+          <td>{{exo.jour}}</td>
+            {% if exo.exercice == 'Vélo' %}
+            <td><img src="{% static 'velo.png' %}" style="max-width:50px" alt="velo"></td>
+            {% elif exo.exercice == 'Natation' %}
+            <td><img src="{% static 'natation.png' %}" style="max-width:50px" alt="natation"></td>
+            {% elif exo.exercice == 'Course à pieds' %}
+            <td><img src="{% static 'course.png' %}" style="max-width:50px" alt="course"></td>
+            {% elif exo.exercice == "Renforcement musculaire" %}
+            <td><img src="{% static 'renforcement.png' %}" style="max-width:50px" alt="renfo"></td>
+            {% elif exo.exercice == "Etirements" %}
+            <td><img src="{% static 'etirements.png' %}" style="max-width:50px" alt="etirements"></td>
+            {% elif exo.exercice == 'Basket' %}
+            <td><img src="{% static 'basket.png' %}" style="max-width:50px" alt="basket"></td>
+            {% elif exo.exercice == "Salle" %}
+            <td><img src="{% static 'salle.png' %}" style="max-width:50px" alt="salle"></td>
+            {% elif exo.exercice == "Défi" %}
+            <td><img src="{% static 'defi.png' %}" style="max-width:50px" alt="defi"></td>
+            {% endif %}
+
+          <td>{{exo.duree}} minutes</td>
+      </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

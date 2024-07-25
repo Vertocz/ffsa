@@ -233,3 +233,8 @@ def entretien_ete(request):
         form = Ete_exoForm()
         form.fields["joueuse"] = forms.ModelChoiceField(queryset=Personne.objects.filter(pf=True))
         return render(request, "entretien_ete.html", {'form': form})
+
+
+def summer_body(request):
+    resume = Ete_exo.objects.all()
+    return render(request, "summerbody.html", {'resume': resume})

@@ -21,4 +21,5 @@ urlpatterns = [
     path('prepa/', prepa_camille, name='prepa'),
     path('camille/', camille, name='camille'),
     path('entretien/', entretien_ete, name='entretien'),
+    path('summerbody/', summer_body, name='summer')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
