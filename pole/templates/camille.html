@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<h1>Résultats Prépa Physique</h1>
+
+<table id="table_resume">
+  <thead>
+    <tr>
+        <th>Date</th>
+        <th>Joueuse</th>
+        <th>Exercice</th>
+        <th>Plaisir</th>
+        <th>Effort</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  {% for test in tests %}
+      <tr>
+          <td>{{test.jour}}</td>
+          <td>{{test.joueuse.prenom}}</td>
+            {% if test.exercice == 'Vélo' %}
+            <td><img src="{% static 'velo.png' %}" style="max-width:50px" alt="velo"></td>
+            {% elif test.exercice == 'Natation' %}
+            <td><img src="{% static 'natation.png' %}" style="max-width:50px" alt="natation"></td>
+            {% elif test.exercice == 'Course à pieds' %}
+            <td><img src="{% static 'course.png' %}" style="max-width:50px" alt="course"></td>
+            {% elif test.exercice == "Renforcement musculaire" %}
+            <td><img src="{% static 'renforcement.png' %}" style="max-width:50px" alt="renfo"></td>
+            {% elif test.exercice == "Etirements" %}
+            <td><img src="{% static 'etirements.png' %}" style="max-width:50px" alt="etirements"></td>
+            {% endif %}
+
+            {% if test.plaisir == 0 %}
+            <td><img src="{% static 'smiley0.png' %}" style="max-width:50px" alt=""></td>
+            {% elif test.plaisir == 1 %}
+            <td><img src="{% static 'smiley1.png' %}" style="max-width:50px" alt=""></td>
+            {% elif test.plaisir == 2 %}
+            <td><img src="{% static 'smiley2.png' %}" style="max-width:50px" alt=""></td>
+            {% elif test.plaisir == 3 %}
+            <td><img src="{% static 'smiley3.png' %}" style="max-width:50px" alt=""></td>
+            {% elif test.plaisir == 4 %}
+            <td><img src="{% static 'smiley4.png' %}" style="max-width:50px" alt=""></td>
+            {% endif %}
+
+          <td>{{test.effort}}/10</td>
+      </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

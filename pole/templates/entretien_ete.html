@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+
+<h1>&#128526; Entretien été &#128526;</h1>
+
+<form action="" method="POST" novalidate>
+    {% csrf_token %}
+    <h2>&#9977;&#65039;&#8205;&#9792;&#65039; Joueuse &#9977;&#65039;&#8205;&#9792;&#65039;</h2>
+    {{ form.joueuse }}
+
+    <h2>&#128198; Date &#128198;</h2>
+    <input type="date" name="jour" id="jour">
+
+    <h2>&#9203; Durée &#8987;</h2>
+    <div><input type="text" name="duree" id="duree" size="3"> minutes</div>
+
+    <h2>Exercice</h2>
+    <div class="radio">
+        <div class="form-check">
+            <img src="{% static 'natation.png' %}" style="max-width:100px">
+            <label>Natation</label>
+            <input class="form-check-input" type="radio" name='exercice' id=natation value='Natation'>
+        </div>
+        <div class="form-check">
+            <img src="{% static 'velo.png' %}" style="max-width:100px">
+            <label>Vélo</label>
+            <input class="form-check-input" type="radio" name='exercice' id=velo value='Vélo'>
+        </div>
+         <div class="form-check">
+            <img src="{% static 'course.png' %}" style="max-width:100px">
+            <label>Course</label>
+            <input class="form-check-input" type="radio" name='exercice' id=course value='Course à pieds'>
+        </div>
+        <div class="form-check">
+            <img src="{% static 'renforcement.png' %}" style="max-width:100px">
+            <label>Renforcement</label>
+            <input class="form-check-input" type="radio" name='exercice' id=renforcement value="Renforcement musculaire">
+        </div>
+        <div class="form-check">
+            <img src="{% static 'etirements.png' %}" style="max-width:100px">
+            <label>Etirements</label>
+            <input class="form-check-input" type="radio" name='exercice' id=etirements value="Etirements">
+        </div>
+        <div class="form-check">
+            <img src="{% static 'basket.png' %}" style="max-width:100px; max-height: 100px;">
+            <label>Basket</label>
+            <input class="form-check-input" type="radio" name='exercice' id=basket value="Basket">
+        </div>
+        <div class="form-check">
+            <img src="{% static 'salle.png' %}" style="max-width:100px">
+            <label>Salle</label>
+            <input class="form-check-input" type="radio" name='exercice' id=salle value="Salle">
+        </div>
+        <div class="form-check">
+            <img src="{% static 'defi.png' %}" style="max-width:100px">
+            <label>Défi</label>
+            <input class="form-check-input" type="radio" name='exercice' id=defi value="Défi">
+        </div>
+    </div>
+
+
+    <input class="bouton-accueil" type="submit" value="Enregistrer">
+</form>
+
+{% if resume|length > 0%}
+
+<h1>Résumé de l'été - {{ joueuse }}</h1>
+
+<table style="width: 500px">
+  <thead>
+    <tr>
+        <th style="width: 200px">Date</th>
+        <th style="width: 150px">Exercice</th>
+        <th style="width: 150px">Durée</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  {% for exo in resume %}
+      <tr>
+          <td>{{exo.jour}}</td>
+            {% if exo.exercice == 'Vélo' %}
+            <td><img src="{% static 'velo.png' %}" style="max-width:50px" alt="velo"></td>
+            {% elif exo.exercice == 'Natation' %}
+            <td><img src="{% static 'natation.png' %}" style="max-width:50px" alt="natation"></td>
+            {% elif exo.exercice == 'Course à pieds' %}
+            <td><img src="{% static 'course.png' %}" style="max-width:50px" alt="course"></td>
+            {% elif exo.exercice == "Renforcement musculaire" %}
+            <td><img src="{% static 'renforcement.png' %}" style="max-width:50px" alt="renfo"></td>
+            {% elif exo.exercice == "Etirements" %}
+            <td><img src="{% static 'etirements.png' %}" style="max-width:50px" alt="etirements"></td>
+            {% elif exo.exercice == 'Basket' %}
+            <td><img src="{% static 'basket.png' %}" style="max-width:50px" alt="basket"></td>
+            {% elif exo.exercice == "Salle" %}
+            <td><img src="{% static 'salle.png' %}" style="max-width:50px" alt="salle"></td>
+            {% elif exo.exercice == "Défi" %}
+            <td><img src="{% static 'defi.png' %}" style="max-width:50px" alt="defi"></td>
+            {% endif %}
+
+          <td>{{exo.duree}} minutes</td>
+      </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<div>A suivre...</div>
+
+{% endif %}
+{% endblock %}

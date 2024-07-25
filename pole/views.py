@@ -195,7 +195,7 @@ def prepa_camille(request):
         form = PrepaForm(request.POST)
         form.fields["joueuse"] = forms.ModelChoiceField(queryset=Personne.objects.filter(pf=True))
         if form.is_valid():
-            print(datetime.datetime.today().strftime("%d/%m/%y"), str(Personne.objects.get(id=form.data['joueuse'])) + ' //', 'Type d\'entraînement :', form.data['exercice'] + ',', 'Plaisir :', form.data['plaisir'] + '/5, Effort :', form.data['effort'] + '/10')
+            Camille(jour=datetime.datetime.today(), joueuse=Personne.objects.get(id=form.data['joueuse']), exercice=form.data['exercice'], plaisir=form.data['plaisir'], effort=form.data['effort']).save()
             messages.success(request, 'Le test a bien été rempli')
             return render(request, "prepa.html", {'form': form})
         else:
@@ -207,3 +207,29 @@ def prepa_camille(request):
         form = PrepaForm()
         form.fields["joueuse"] = forms.ModelChoiceField(queryset=Personne.objects.filter(pf=True))
         return render(request, "prepa.html", {'form': form})
+
+
+def camille(request):
+    tests = Camille.objects.all()
+    return render(request, "camille.html", {'tests': tests})
+
+
+def entretien_ete(request):
+    if request.method == 'POST':
+        form = Ete_exoForm(request.POST)
+        form.fields["joueuse"] = forms.ModelChoiceField(queryset=Personne.objects.filter(pf=True))
+        if form.is_valid():
+            Ete_exo(jour=form.data['jour'], joueuse=Personne.objects.get(id=form.data['joueuse']), exercice=form.data['exercice'], duree=form.data['duree']).save()
+            messages.success(request, 'L\'exercice a bien été enregistré')
+            resume_joueuse = Ete_exo.objects.filter(joueuse=Personne.objects.get(id=form.data['joueuse']))
+            return render(request, "entretien_ete.html", {'form': form, 'resume': resume_joueuse, 'joueuse': Personne.objects.get(id=form.data['joueuse'])})
+        else:
+            print(form.errors.as_data())
+            messages.success(request, 'Quelque chose ne s\'est pas passé correctement')
+            form = Ete_exoForm()
+            form.fields["joueuse"] = forms.ModelChoiceField(queryset=Personne.objects.filter(pf=True))
+            return render(request, "entretien_ete.html", {'form': form})
+    else:
+        form = Ete_exoForm()
+        form.fields["joueuse"] = forms.ModelChoiceField(queryset=Personne.objects.filter(pf=True))
+        return render(request, "entretien_ete.html", {'form': form})

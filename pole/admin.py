@@ -18,7 +18,12 @@ class GifAdmin(admin.ModelAdmin):
     list_display = ['mot', 'image']
 
 
+class CamilleAdmin(admin.ModelAdmin):
+    list_display = ['joueuse', 'jour', 'exercice', 'plaisir', 'effort']
+
+
 admin.site.register(Personne, PersonneAdmin)
 admin.site.register(Billet, BilletAdmin)
 admin.site.register(Entree, EntreeAdmin)
 admin.site.register(Gif, GifAdmin)
+admin.site.register(Camille, CamilleAdmin)

@@ -38,7 +38,15 @@ class Gif(models.Model):
 
 
 class Camille(models.Model):
+    jour = models.DateField()
     exercice = models.CharField(max_length=30)
     joueuse = models.ForeignKey(Personne, on_delete=models.CASCADE, null=False)
-    plaisir = models.CharField(max_length=15)
+    plaisir = models.IntegerField()
     effort = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
+
+
+class Ete_exo(models.Model):
+    joueuse = models.ForeignKey(Personne, on_delete=models.CASCADE, null=False)
+    jour = models.DateField()
+    exercice = models.CharField(max_length=30)
+    duree = models.IntegerField()

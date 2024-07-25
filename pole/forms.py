@@ -31,3 +31,9 @@ class PrepaForm(forms.ModelForm):
     class Meta:
         model = Camille
         fields = ['joueuse', 'exercice', 'plaisir', 'effort']
+
+
+class Ete_exoForm(forms.ModelForm):
+    class Meta:
+        model = Ete_exo
+        fields = ['joueuse', 'jour', 'duree', 'exercice']

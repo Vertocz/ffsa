@@ -102,6 +102,25 @@ form {
     margin: 0 1rem;
 }
 
+table {
+    width: 90%;
+    margin: auto;
+    justify-content: center;
+    border-collapse: collapse;
+    table-layout: fixed;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 5px 10px;
+    text-shadow: rgba(0, 0, 0, 0) 1px 5px 5px;
+    max-width: 900px;
+}
+
+thead th {
+   color: white;
+   font-size: calc(30px);
+   font-weight: bold;
+   text-align: center;
+   background-color: var(--c2);
+}
+
 input {
     text-align: center;
 }
