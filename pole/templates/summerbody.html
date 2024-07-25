@@ -19,7 +19,7 @@
   <tbody>
   {% for exo in resume %}
       <tr>
-        <td>{{exo.joueuse.prenom}}</td>
+        <td><a href="{% url 'summer-indiv' exo.joueuse.id %}">{{exo.joueuse.prenom}}</a></td>
           <td>{{exo.jour}}</td>
             {% if exo.exercice == 'Vélo' %}
             <td><img src="{% static 'velo.png' %}" style="max-width:50px" alt="velo"></td>

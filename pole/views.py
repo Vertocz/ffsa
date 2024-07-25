@@ -235,6 +235,12 @@ def entretien_ete(request):
         return render(request, "entretien_ete.html", {'form': form})
 
 
-def summer_body(request):
+def summer_bodies(request):
     resume = Ete_exo.objects.all()
     return render(request, "summerbody.html", {'resume': resume})
+
+
+def summer_body(request, id):
+    resume = Ete_exo.objects.filter(joueuse=Personne.objects.get(id=id))
+    return render(request, "summerbody.html", {'resume': resume})
+
