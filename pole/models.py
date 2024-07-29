@@ -49,4 +49,4 @@ class Ete_exo(models.Model):
     joueuse = models.ForeignKey(Personne, on_delete=models.CASCADE, null=False)
     jour = models.DateField()
     exercice = models.CharField(max_length=30)
-    duree = models.IntegerField()
+    duree = models.CharField(max_length=50)
