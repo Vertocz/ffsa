@@ -236,11 +236,11 @@ def entretien_ete(request):
 
 
 def summer_bodies(request):
-    resume = Ete_exo.objects.all()
+    resume = Ete_exo.objects.all().order_by('jour')
     return render(request, "summerbody.html", {'resume': resume})
 
 
 def summer_body(request, id):
-    resume = Ete_exo.objects.filter(joueuse=Personne.objects.get(id=id))
+    resume = Ete_exo.objects.filter(joueuse=Personne.objects.get(id=id)).order_by('jour')
     return render(request, "summerbody.html", {'resume': resume})
 
