@@ -244,3 +244,11 @@ def summer_body(request, id):
     resume = Ete_exo.objects.filter(joueuse=Personne.objects.get(id=id)).order_by('jour')
     return render(request, "summerbody.html", {'resume': resume})
 
+
+def control_view(request):
+    return render(request, 'control.html')
+
+
+def display_view(request):
+    return render(request, 'display.html')
+

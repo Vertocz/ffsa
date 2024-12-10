@@ -1,0 +1,97 @@
+/* Charger la police Oxanium */
+@font-face {
+    font-family: 'Oxanium';
+    src: url('https://fonts.googleapis.com/css2?family=Oxanium&display=swap');
+}
+
+body {
+    font-family: 'Oxanium', sans-serif;
+    text-align: center;
+    background-color: #fff;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-top: 20px;
+    color: #333;
+}
+
+/* En-tête */
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    padding: 0 20px;
+}
+
+.team {
+    width: 30%;
+}
+
+#team1-score, #team2-score {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.fouls {
+    font-size: 1.2rem;
+    color: green;  /* Couleur par défaut, sera modifiée dynamiquement */
+}
+
+/* Chrono principal */
+.chrono {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#match-time {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #000;
+}
+
+/* Zone centrale : Bande de possession */
+.possession-container {
+    width: 50%;
+    height: 70%;
+    margin: 20px auto;
+    position: relative;
+}
+
+.possession-bar {
+    width: 100%;
+    height: 100%;
+    background-color: #008819; /* Couleur initiale verte */
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: background-color 0.5s ease-out, height 0.1s ease-out;
+}
+
+#possession-time {
+    font-size: 2rem;
+    margin-top: 10px;
+    color: #000;
+}
+
+/* Changement de couleur des fautes */
+.fouls.green {
+    color: green;
+}
+
+.fouls.orange {
+    color: orange;
+}
+
+.fouls.red {
+    color: red;
+}
+
+.fouls.violet {
+    color: violet;
+}

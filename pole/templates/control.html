@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrôle du match</title>
+    {% load static %} <!-- Chargement des fichiers statiques -->
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+        .team {
+            text-align: center;
+            margin: 20px;
+        }
+        .team input {
+            width: 150px;
+        }
+        .controls {
+            text-align: center;
+        }
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .chrono-controls, .possession-controls {
+            display: flex;
+            justify-content: center;
+            width: 200px;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Contrôle du match 3x3</h1>
+
+    <!-- Sélection du match -->
+    <div class="controls">
+        <label for="match-id">ID du Match :</label>
+        <input type="text" id="match-id" placeholder="Ex: match1">
+        <button class="btn" onclick="connectToMatch()">Se connecter</button>
+    </div>
+
+    <!-- Noms des équipes -->
+    <div class="container">
+        <div class="team">
+            <label for="team1-name">Équipe 1</label><br>
+            <input type="text" id="team1-name" placeholder="Nom de l'équipe 1">
+            <div>
+                <div id="team1-score">Score: 0</div>
+                <button class="btn" onclick="updateTeam('team1', 1)">+1</button>
+                <button class="btn" onclick="updateTeam('team1', 2)">+2</button>
+                <button class="btn" onclick="updateTeam('team1', -1)">-1</button>
+            </div>
+            <div>
+                <div id="team1-fouls">Fautes: 0</div>
+                <button class="btn" onclick="updateFouls('team1', 1)">+1</button>
+                <button class="btn" onclick="updateFouls('team1', -1)">-1</button>
+            </div>
+        </div>
+
+        <div class="team">
+            <label for="team2-name">Équipe 2</label><br>
+            <input type="text" id="team2-name" placeholder="Nom de l'équipe 2">
+            <div>
+                <div id="team2-score">Score: 0</div>
+                <button class="btn" onclick="updateTeam('team2', 1)">+1</button>
+                <button class="btn" onclick="updateTeam('team2', 2)">+2</button>
+                <button class="btn" onclick="updateTeam('team2', -1)">-1</button>
+            </div>
+            <div>
+                <div id="team2-fouls">Fautes: 0</div>
+                <button class="btn" onclick="updateFouls('team2', 1)">+1</button>
+                <button class="btn" onclick="updateFouls('team2', -1)">-1</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contrôles du match -->
+    <div class="controls">
+        <div class="chrono">
+            <h2>Chrono du match</h2>
+            <div id="match-time">10:00</div>
+            <div class="chrono-controls">
+                <button class="btn" id="start-stop" onclick="startStopMatch()">Start</button>
+                <button class="btn" onclick="adjustTime('match', 1)">+1</button>
+                <button class="btn" onclick="adjustTime('match', -1)">-1</button>
+            </div>
+        </div>
+
+        <div class="possession">
+            <h2>Temps de possession</h2>
+            <div id="possession-time">12.0</div>
+            <div class="possession-controls">
+                <button class="btn" id="possession-start-stop" onclick="startStopPossession()">Start</button>
+                <button class="btn" onclick="resetPossession()">Reset</button>
+                <button class="btn" onclick="adjustTime('possession', 1)">+1</button>
+                <button class="btn" onclick="adjustTime('possession', -1)">-1</button>
+            </div>
+        </div>
+    </div>
+
+    <h2>Affichage terrain</h2>
+    <button class="btn" onclick="openDisplay()">Ouvrir</button>
+
+    <script src="{% static 'js/control.js' %}"></script>
+</body>
+</html>

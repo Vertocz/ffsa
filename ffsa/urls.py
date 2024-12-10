@@ -23,4 +23,6 @@ urlpatterns = [
     path('entretien/', entretien_ete, name='entretien'),
     path('summerbody/', summer_bodies, name='summer'),
     path('summerbody/<int:id>/', summer_body, name='summer-indiv'),
+    path('control/', control_view, name='control'),
+    path('display/', display_view, name='display'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

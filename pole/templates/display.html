@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affichage</title>
+    {% load static %}  <!-- Chargement du fichier static -->
+    <link rel="stylesheet" type="text/css" href="{% static '3x3.css' %}">
+</head>
+<body>
+
+    <!-- En-tête -->
+    <div class="header">
+        <div class="team">
+            <div id="team1-score">0</div>
+            <div id="team1-fouls" class="fouls">Fautes: 0</div>
+        </div>
+        <div class="chrono">
+            <div id="match-time">00:00.0</div>
+        </div>
+        <div class="team">
+            <div id="team2-score">0</div>
+            <div id="team2-fouls" class="fouls">Fautes: 0</div>
+        </div>
+    </div>
+
+    <!-- Zone centrale : Temps de possession -->
+    <div class="possession-container">
+        <div class="possession-bar" id="possession-bar"></div>
+        <div id="possession-time">12.0</div>
+    </div>
+
+    <!-- Fond d'écran : Le temps du match -->
+    <div class="background" id="background"></div>
+
+    <script src="{% static 'js/display.js' %}"></script>
+</body>
+</html>
