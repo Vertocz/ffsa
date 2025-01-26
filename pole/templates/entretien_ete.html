@@ -4,7 +4,8 @@
 {% load static %}
 
 
-<h1>&#128526; Entretien été &#128526;</h1>
+<h1>&#128526; Sport &#128526;</h1>
+<div>120 minutes par semaine</div>
 
 <form action="" method="POST" novalidate>
     {% csrf_token %}
@@ -35,29 +36,19 @@
             <input class="form-check-input" type="radio" name='exercice' id=course value='Course à pieds'>
         </div>
         <div class="form-check">
-            <img src="{% static 'renforcement.png' %}" style="max-width:100px">
-            <label>Renforcement</label>
-            <input class="form-check-input" type="radio" name='exercice' id=renforcement value="Renforcement musculaire">
-        </div>
-        <div class="form-check">
-            <img src="{% static 'etirements.png' %}" style="max-width:100px">
-            <label>Etirements</label>
-            <input class="form-check-input" type="radio" name='exercice' id=etirements value="Etirements">
-        </div>
-        <div class="form-check">
-            <img src="{% static 'basket.png' %}" style="max-width:100px; max-height: 100px;">
-            <label>Basket</label>
-            <input class="form-check-input" type="radio" name='exercice' id=basket value="Basket">
-        </div>
-        <div class="form-check">
             <img src="{% static 'salle.png' %}" style="max-width:100px">
             <label>Salle</label>
             <input class="form-check-input" type="radio" name='exercice' id=salle value="Salle">
         </div>
         <div class="form-check">
-            <img src="{% static 'defi.png' %}" style="max-width:100px">
-            <label>Défi</label>
-            <input class="form-check-input" type="radio" name='exercice' id=defi value="Défi">
+            <img src="{% static 'marche.png' %}" style="max-width:100px; max-height: 100px;">
+            <label>Marche</label>
+            <input class="form-check-input" type="radio" name='exercice' id=marche value="Marche">
+        </div>
+        <div class="form-check">
+            <img src="{% static 'autre.png' %}" style="max-width:100px; max-height: 100px;">
+            <label>Autre</label>
+            <input class="form-check-input" type="radio" name='autre' id=autre value="Autre">
         </div>
     </div>
 
