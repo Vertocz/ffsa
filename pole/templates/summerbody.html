@@ -37,6 +37,8 @@
             <td><img src="{% static 'salle.png' %}" style="max-width:50px" alt="salle"></td>
             {% elif exo.exercice == "Défi" %}
             <td><img src="{% static 'defi.png' %}" style="max-width:50px" alt="defi"></td>
+            {% elif exo.exercice == "Autre" %}
+            <td><img src="{% static 'autre.png' %}" style="max-width:50px" alt="autre"></td>
             {% endif %}
 
           <td>{{exo.duree}}</td>
